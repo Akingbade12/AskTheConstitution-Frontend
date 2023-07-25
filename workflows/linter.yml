@@ -1,0 +1,23 @@
+---
+name: Check-Linter
+
+on: push
+
+jobs:
+  check-lint:
+    name: Lint code base
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Run Check-Linter
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GH_AUTH_TOKEN }}
+          VALIDATE_CSS: false
+          VALIDATE_JSCPD: false
